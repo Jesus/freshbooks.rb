@@ -13,7 +13,13 @@ module FreshBooks
       s.string :p_street1, :p_street2, :p_city, :p_state, :p_country, :p_code
       s.string :return_uri
     end
-    
+
     actions :list, :get, :create, :update, :delete, :send_by_email, :send_by_snail_mail
+
+    def getPDF
+      FreshBooks::Base.connection.call_api_raw(
+        "#{self.class.api_class_name}.getPDF",
+        "#{self.class.api_class_name}_id" => primary_key_value)
+    end
   end
 end

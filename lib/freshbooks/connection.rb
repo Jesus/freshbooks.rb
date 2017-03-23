@@ -30,6 +30,10 @@ module FreshBooks
       @start_session_count = 0
     end
 
+    def call_api_raw(method, elements = [])
+      post create_request(method, elements)
+    end
+
     def call_api(method, elements = [])
       request = create_request(method, elements)
       result = post(request)
